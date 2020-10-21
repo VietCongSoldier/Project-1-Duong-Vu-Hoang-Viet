@@ -9,7 +9,7 @@ namespace Project_1_Dương_Vũ_Hoàng_Việt
     {
         private StreamReader SR;
         private StreamWriter SW;
-        private string filename = "hanghoa.txt";
+        private string filename = @"E:\hanghoa.txt";
         public HangHoa()
         {
             
@@ -17,37 +17,75 @@ namespace Project_1_Dương_Vũ_Hoàng_Việt
         public void HienThiHangHoa()
         {
             Console.Clear();
-            SR = new StreamReader(filename);
+            SR =new StreamReader(filename);
+            string[] plit;
             string docfile;
-            Console.WriteLine("Tên SP\t\tMã SP\t\tĐơn Giá\tSố Lượng\tĐơn Vị Tính\tThành Tiền");
-            while ((docfile = SR.ReadLine()) == null) ;
+            do
             {
-                string[] plit = docfile.Split("|");
-                Console.WriteLine($"{plit[0]}\t{plit[1]}\t{plit[2]}\t{plit[3]}\t{plit[4]}\t{plit[5]}");
+                docfile = SR.ReadLine();
+                plit = docfile.Split("|");
             }
+            while (docfile == null);
+            Console.SetCursorPosition(1,1); 
+            Console.WriteLine("Mã SP");
+            Console.SetCursorPosition(plit[0].Length + 5,1 ); 
+            Console.WriteLine("Tên SP");
+            Console.SetCursorPosition(plit[0].Length + 5 + plit[1].Length + 6, 1); 
+            Console.WriteLine("Đơn giá");
+            Console.SetCursorPosition(plit[0].Length + 5 + plit[1].Length + 6 + plit[2].Length + 7, 1 ); 
+            Console.WriteLine("Số Lượng");
+            Console.SetCursorPosition(plit[0].Length + 5 + plit[1].Length + 6 + plit[2].Length + 7 + plit[3].Length + 8, 1); 
+            Console.WriteLine("Đơn vị tính");
+            Console.SetCursorPosition(plit[0].Length + 5 + plit[1].Length + 6 + plit[2].Length + 7 + plit[3].Length + 8 + plit[4].Length + 11, 1);
+            Console.WriteLine("Thành tiền(VNĐ)");
+            
+            Console.SetCursorPosition(1, 2); 
+            Console.WriteLine(plit[0]);
+            Console.SetCursorPosition(plit[0].Length + 5, 2); 
+            Console.WriteLine(plit[1]);
+            Console.SetCursorPosition(plit[0].Length + 5 + plit[1].Length + 6, 2);
+            Console.WriteLine(plit[2]);
+            Console.SetCursorPosition(plit[0].Length + 5 + plit[1].Length + 6 + plit[2].Length + 7, 2); 
+            Console.WriteLine(plit[3]);
+            Console.SetCursorPosition(plit[0].Length + 5 + plit[1].Length + 6 + plit[2].Length + 7 + plit[3].Length + 8, 2); 
+            Console.WriteLine(plit[4]);
+            Console.SetCursorPosition(plit[0].Length + 5 + plit[1].Length + 6 + plit[2].Length + 7 + plit[3].Length + 8 + plit[4].Length + 11, 2); 
+            Console.WriteLine(plit[5]);
             SR.Close();
         }
         public void Themsp()
         {
             Console.Clear();
             SW = new StreamWriter(filename);
-            Console.Write("\n\n\n\n\n\n\t\t\t\t\tNhập Tên SP:"); string tensp = Console.ReadLine();
-            Console.Write("\t\t\t\t\tNhập Mã SP:"); string masp = Console.ReadLine();
-            Console.Write("\t\t\t\t\tĐơn giá:"); int dongia = int.Parse(Console.ReadLine());
-            Console.Write("\t\t\t\t\tSố lượng:"); int soluong = int.Parse(Console.ReadLine());
-            Console.Write("\t\t\t\t\tĐơn vị tính:"); string donvitinh = Console.ReadLine();
+            string tensp, masp, donvitinh;
+            int dongia, soluong;
+            do {
+                Console.SetCursorPosition(43,8);
+                Console.Write("Nhập Mã SP:"); masp = Console.ReadLine();
+            } while (masp == "");
+            do
+            {
+                Console.SetCursorPosition(43, 9);
+                Console.Write("Nhập Tên SP:"); tensp = Console.ReadLine();
+            } while (tensp == "");
+            Console.SetCursorPosition(43, 10);
+            Console.Write("Đơn giá:"); dongia = int.Parse(Console.ReadLine());
+            Console.SetCursorPosition(43, 11);
+            Console.Write("Số lượng:"); soluong = int.Parse(Console.ReadLine());
+            Console.SetCursorPosition(43, 12);
+            Console.Write("Đơn vị tính:"); donvitinh = Console.ReadLine();
             int thanhtien = dongia * soluong;
-            Console.WriteLine($"Thành tiền:{thanhtien}");
+            Console.WriteLine($"Thành tiền(VNĐ):{thanhtien}");
             Console.WriteLine("Đã thêm sản phẩm vào kho !");
-            SW.WriteLine($"{tensp}|{masp}|{dongia}|{soluong}|{donvitinh}|{thanhtien}");
+            SW.WriteLine($"{masp}|{tensp}|{dongia}|{soluong}|{donvitinh}|{thanhtien}");
             SW.Close();
         }
         public void Suasp()
         {
             Console.Clear();
             Console.Write("\n\n\n\n\n\n\t\t\t\t\tNhập Mã SP cần sửa:"); string masp = Console.ReadLine();
-            Console.Write("\t\t\t\t\tNhập Tên SP mới:"); string tensp = Console.ReadLine();
-            Console.Write("\t\t\t\t\tNhập Mã SP mới:"); string maspmoi = Console.ReadLine();
+            Console.Write("\t\t\t\t\tNhập Mã SP mới:"); string tensp = Console.ReadLine();
+            Console.Write("\t\t\t\t\tNhập Tên SP mới:"); string maspmoi = Console.ReadLine();
             Console.Write("\t\t\t\t\tĐơn giá:"); int dongia = int.Parse(Console.ReadLine());
             Console.Write("\t\t\t\t\tSố lượng:"); int soluong = int.Parse(Console.ReadLine());
             Console.Write("\t\t\t\t\tĐơn vị tính:"); string donvitinh = Console.ReadLine();
@@ -61,7 +99,7 @@ namespace Project_1_Dương_Vũ_Hoàng_Việt
                 string[] dlhanghoa = read.Split('|');
                 if (dlhanghoa[1] == masp)
                 {
-                    temp += tensp + '|' + maspmoi + '|' + dongia + '|' + soluong + '|' + donvitinh + '|' + thanhtien + '\n';
+                    temp += maspmoi + '|' + tensp + '|' + dongia + '|' + soluong + '|' + donvitinh + '|' + thanhtien + '\n';
                 }
                 else
                 {
@@ -81,10 +119,10 @@ namespace Project_1_Dương_Vũ_Hoàng_Việt
         {
 
         }
-        public void Hienthihoadonnhap()
+        public void NhapvaHienthihoadonnhap()
         {
             Console.SetCursorPosition(25,  8); Console.WriteLine("|____________________________________________________________________|");
-            Console.SetCursorPosition(25,  9); Console.WriteLine("|                            HÓA ĐƠN NHẬP KHO                        |");
+            Console.SetCursorPosition(25,  9); Console.WriteLine("|                          HÓA ĐƠN NHẬP KHO                          |");
             Console.SetCursorPosition(25, 10); Console.WriteLine("|                                                                    |");
             Console.SetCursorPosition(25, 11); Console.WriteLine("|                                                                    |");
             Console.SetCursorPosition(25, 12); Console.WriteLine("|                                                                    |");
@@ -95,10 +133,10 @@ namespace Project_1_Dương_Vũ_Hoàng_Việt
             Console.SetCursorPosition(25, 17); Console.WriteLine("|                                                                    |");
             Console.SetCursorPosition(25, 18); Console.WriteLine("|____________________________________________________________________|");
         }
-        public void Hienthihoadonxuat()
+        public void XuatvaHienthihoadonxuat()
         {
             Console.SetCursorPosition(25,  8); Console.WriteLine("|____________________________________________________________________|");
-            Console.SetCursorPosition(25,  9); Console.WriteLine("|                            HÓA ĐƠN XUẤT KHO                        |");
+            Console.SetCursorPosition(25,  9); Console.WriteLine("|                          HÓA ĐƠN XUẤT KHO                          |");
             Console.SetCursorPosition(25, 10); Console.WriteLine("|                                                                    |");
             Console.SetCursorPosition(25, 11); Console.WriteLine("|                                                                    |");
             Console.SetCursorPosition(25, 12); Console.WriteLine("|                                                                    |");
